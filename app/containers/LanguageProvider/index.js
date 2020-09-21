@@ -14,6 +14,9 @@ import { IntlProvider } from 'react-intl';
 
 import { makeSelectLocale } from './selectors';
 
+
+import 'style.scss';
+
 export function LanguageProvider(props) {
   return (
     <IntlProvider

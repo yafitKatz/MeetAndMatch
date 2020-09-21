@@ -10,6 +10,8 @@ import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
 
+import 'style.scss';
+
 export default function NotFound() {
   return (
     <h1>

@@ -4,6 +4,7 @@
  * This is the first thing users see of our App, at the '/' route
  *
  */
+import 'style.scss';
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
