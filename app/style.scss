@@ -1,0 +1,41 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #42392c;
+}
+
+body.fontLoaded {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#app {
+  background-color: #c2b29a;
+  font-family: 'stencil';
+  font-weight: bolder;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+hr{
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  color: #776a5f
+}
+
+p,
+label {
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  line-height: 1.5em;
+  color: #776a5f
+}
+
+#background{
+  width: 45%;
+  height: 60vh;
+  z-index: -1;
+}
