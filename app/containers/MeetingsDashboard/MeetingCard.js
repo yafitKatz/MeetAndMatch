@@ -4,7 +4,7 @@ import './style.scss';
 
 export default function MeetingCard(props) {
     return (
-        <div className="meetingCard">
+        <>
             <center>
                 <br />
                 <h3>{props.firstParticipant} with</h3>
@@ -12,9 +12,9 @@ export default function MeetingCard(props) {
                 <h5>
                     {props.address}, {props.date}
                 </h5>
+                {props.btn}
             </center>
-            <hr />
-        </div>
+        </>
     );
 }
 

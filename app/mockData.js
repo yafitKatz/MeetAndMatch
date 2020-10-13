@@ -1,6 +1,6 @@
 export const mockData = [
   {
-    _id: '5f7a331994318dd6aa66c746',
+    id: '5f7a331994318dd6aa66c746',
     address: '807 Varick Street, Gardners, Mississippi, 2239',
     date: '2018-02-23',
     firstPrticipant: {
@@ -15,7 +15,7 @@ export const mockData = [
     },
   },
   {
-    _id: '5f7a3319769422e963108a50',
+    id: '5f7a3319769422e963108a50',
     address: '183 Walker Court, Cleary, Louisiana, 9611',
     date: '2020-04-08',
     firstPrticipant: {
@@ -30,7 +30,7 @@ export const mockData = [
     },
   },
   {
-    _id: '5f7a331995bc0d283adcc1db',
+    id: '5f7a331995bc0d283adcc1db',
     address: '746 Taylor Street, Enlow, Federated States Of Micronesia, 1765',
     date: '2019-08-28',
     firstPrticipant: {
@@ -45,7 +45,7 @@ export const mockData = [
     },
   },
   {
-    _id: '5f7a3319e2a03a213623223a',
+    id: '5f7a3319e2a03a213623223a',
     address: '131 Lois Avenue, Ruffin, Vermont, 1141',
     date: '2015-06-29',
     firstPrticipant: {
@@ -60,7 +60,7 @@ export const mockData = [
     },
   },
   {
-    _id: '5f7a3319ba3d8bfb2818c77d',
+    id: '5f7a3319ba3d8bfb2818c77d',
     address: '917 Doscher Street, Shrewsbury, Massachusetts, 1058',
     date: '2020-09-28',
     firstPrticipant: {

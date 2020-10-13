@@ -13,6 +13,18 @@ form{
     border: none;
 }
 
+.mb-2{
+  margin-bottom: .5rem;
+}
+
+.my-2{
+  margin-bottom: .5rem;
+}
+
+#inlineFormInput{
+  margin-bottom: 0px;
+}
+
 .btn-primary{
     display: inline-flex;
     padding: 0.4vw 1.5vw;
@@ -42,7 +54,18 @@ form{
       color: #fff;
     }
     &::after {
-      background-color: #5c5244;
-      color: #fff;
+      background-color: #5c5244 !important;
+      color: #fff !important;
     }
+}
+
+.alert-light{
+  color: #42392c;
+  background-color: transparent;
+  border: 3px solid #42392c;
+  width: 45vw;
+}
+
+.alertLink{
+  color: #ffffff !important;
 }

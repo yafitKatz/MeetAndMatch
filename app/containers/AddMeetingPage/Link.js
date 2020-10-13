@@ -4,7 +4,8 @@ import styled from 'styled-components';
 export default styled(Link)`
   display: inline-flex;
   padding: 0.4vw 1.5vw;
-  margin: 1vw;
+  margin: 1.5vw;
+  margin-top: 2vw;
   text-decoration: none;
   border-radius: 4px;
   -webkit-font-smoothing: antialiased;
@@ -23,6 +24,7 @@ export default styled(Link)`
     background-color: #5c5244;
     border: 2px solid #42392c;
     color: #fff;
+    text-decoration: none;
   }
 
   &:active {

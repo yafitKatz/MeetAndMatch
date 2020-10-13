@@ -15,15 +15,14 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import PropTypes from 'prop-types';
-// import { store } from '../../configureStore';
-// import addMeetingOnDate from './actions';
-import {
-  Alert,
-  OverlayTrigger,
-  Popover,
-  PopoverContent,
-  PopoverTitle,
-} from 'react-bootstrap';
+import makeSelectMeetingEvent from './selectors';
+// import {
+//   Alert,
+//   OverlayTrigger,
+//   Popover,
+//   PopoverContent,
+//   PopoverTitle,
+// } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './calendarStyle.scss';
 import saga from './saga';
@@ -36,19 +35,6 @@ export function CalendarPage(props) {
   // const handleDateClick = arg => {
   //   alert(arg.dateStr);
   // };
-
-  // const events = [
-  //   {
-  //     id: 0,
-  //     title: 'Event1',
-  //     start: '2020-10-04',
-  //   },
-  //   {
-  //     id: 1,
-  //     title: 'Event2',
-  //     start: '2020-10-05',
-  //   },
-  // ];
 
   return (
     <div>
@@ -63,12 +49,26 @@ export function CalendarPage(props) {
           initialView="dayGridMonth"
           events={props.meetingEvents}
           dayMaxEvents={1}
-          eventClick={arg => {
-            alert(arg.event.innerText);
-            // {
-            //   alert ? <Alert variant="light">{arg.event.title}</Alert> : false;
-            // }
-          }}
+          eventClick={
+            arg => {
+              alert(arg.event.title.replace('\n', ' ').replace('\t', ' '));
+              // {
+              //   alert ? <Alert variant="light">{arg.event.title}</Alert> : false;
+              // }
+            }
+            // eventMouseover={(event, jsEvent, view) => {
+            //   $('.fc-event-inner', this).append(
+            //     `<div id=/"${event.id
+            //     }/" class=/"hover-end/">${$.fullCalendar.formatDate(
+            //       event.end,
+            //       'h:mmt',
+            //     )}</div>`,
+            //   );
+            // }}
+            // eventMouseout={(event, jsEvent, view) => {
+            //   $(`#${event.id}`).remove();
+            // }}
+          }
         />
       </center>
     </div>
@@ -80,7 +80,7 @@ CalendarPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  // calendarPage: makeSelectCalendarPage(),
+  meetingEvents: makeSelectMeetingEvent(),
 });
 
 function mapDispatchToProps(dispatch) {

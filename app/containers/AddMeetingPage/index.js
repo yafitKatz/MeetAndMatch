@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -12,18 +12,21 @@ import { compose, bindActionCreators } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { Form, Col, InputGroup, FormControl } from 'react-bootstrap';
+import { Form, Col, InputGroup, FormControl, Alert } from 'react-bootstrap';
 import { Telephone, Person } from 'react-bootstrap-icons';
-import Button from './Button';
-import makeSelectAddMeetingPage from './selectors';
+import uuid from 'uuid-random';
+import Button from '../../components/Button';
 import reducer from './reducer';
 import saga from './saga';
 import { addMeeting } from './actions';
+// import { makeSelectMeetingCard } from './selectors';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
 import Link from './Link';
 
 export function AddMeetingPage(props) {
+  const [show, setShow] = useState(false);
+
   useInjectReducer({ key: 'addMeetingPage', reducer });
   useInjectSaga({ key: 'addMeetingPage', saga });
 
@@ -42,8 +45,8 @@ export function AddMeetingPage(props) {
 
   const newMeeting = {
     id: '',
-    date: new Date(),
     address: '5 Chatam Sofer st. Bnei Brak',
+    date: new Date(),
     firstParticipant: {
       firstName: 'Shimshon',
       lastName: 'Meshulam',
@@ -58,17 +61,9 @@ export function AddMeetingPage(props) {
     },
   };
 
-  const CreateGuid = () => {
-    function p8() {
-      const p = `${Math.random().toString(16)}000000000`.substr(2, 8);
-      return p;
-    }
-    return p8() + p8() + p8();
-  };
-
   const mapFormToDispatch = () => {
     event.preventDefault();
-    newMeeting.id = CreateGuid();
+    newMeeting.id = uuid();
     newMeeting.address = AddressRef.current.value;
     newMeeting.date = DateRef.current.value;
     newMeeting.firstParticipant.firstName = FirstFnameRef.current.value;
@@ -81,9 +76,9 @@ export function AddMeetingPage(props) {
     newMeeting.secondParticipant.email = SecondEmailRef.current.value;
     // mapDispatchToProps(addMeeting({ newMeeting }));
     props.addMeeting(newMeeting);
+    setShow(true);
     // ${this}.unbind('onSubmit').submit();
   };
-  mapDispatchToProps();
 
   return (
     <div>
@@ -98,11 +93,11 @@ export function AddMeetingPage(props) {
                     <Person />
                   </InputGroup.Text>
                 </InputGroup.Prepend>
-                <Form.Control
-                  className="mb-2"
-                  id="inlineFormInput"
-                  placeholder="Insert first name"
+                <FormControl
+                  id="inlineFormInputGroup"
+                  placeholder="Insert first Name"
                   ref={FirstFnameRef}
+                  required
                 />
               </InputGroup>
             </Col>
@@ -117,6 +112,7 @@ export function AddMeetingPage(props) {
                   id="inlineFormInputGroup"
                   placeholder="Insert last Name"
                   ref={FirstLnameRef}
+                  required
                 />
               </InputGroup>
             </Col>
@@ -160,11 +156,11 @@ export function AddMeetingPage(props) {
                     <Person />
                   </InputGroup.Text>
                 </InputGroup.Prepend>
-                <Form.Control
-                  className="mb-2"
-                  id="inlineFormInput"
-                  placeholder="Insert first name"
+                <FormControl
+                  id="inlineFormInputGroup"
+                  placeholder="Insert first Name"
                   ref={SecondFnameRef}
+                  required
                 />
               </InputGroup>
             </Col>
@@ -179,6 +175,7 @@ export function AddMeetingPage(props) {
                   id="inlineFormInputGroup"
                   placeholder="Insert last name"
                   ref={SecondLnameRef}
+                  required
                 />
               </InputGroup>
             </Col>
@@ -222,6 +219,7 @@ export function AddMeetingPage(props) {
                 id="inlineFormInput"
                 placeholder="Insert address"
                 ref={AddressRef}
+                required
               />
             </Col>
             <Col xs="auto">
@@ -231,6 +229,7 @@ export function AddMeetingPage(props) {
                 placeholder="2020-12-30"
                 type="date"
                 ref={DateRef}
+                required
               />
             </Col>
           </Form.Row>
@@ -247,6 +246,20 @@ export function AddMeetingPage(props) {
           </Form.Row>
         </center>
       </Form>
+      {show && (
+        <Alert variant="light">
+          <Alert.Heading>THE MEETING WAS ADDED SUCCESSFULY!</Alert.Heading>
+          <Link
+            to={{
+              pathname: '/MeetingsDashboard',
+              state: { meetings: props.meetingCard },
+            }}
+            id="alertLink"
+          >
+            Move to Meetings Dashboard
+          </Link>
+        </Alert>
+      )}
     </div>
   );
 }
@@ -265,17 +278,10 @@ AddMeetingPage.propTypes = {
   // DateRef: PropTypes.string,
   // newMeeting: PropTypes.object,
   addMeeting: PropTypes.func,
+  meetingCard: PropTypes.array,
 };
 
-const mapStateToProps = createStructuredSelector({
-  addMeetingPage: makeSelectAddMeetingPage(),
-});
-/*
-function mapDispatchToProps(dispatch) {
-  return {
-    addMeeting: newMeeting => dispatch(addMeeting(newMeeting)),
-  };
-} */
+const mapStateToProps = createStructuredSelector({});
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ addMeeting }, dispatch);

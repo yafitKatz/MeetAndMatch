@@ -1,12 +1,12 @@
 /*
  * MeetingsDashboard Messages
  *
- * This contains all the text for the MeetingsDashboard component.
+ * This contains all the text for the MeetingsDashboard container.
  */
 
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.MeetingsDashboard';
+export const scope = 'app.containers.MeetingsDashboard';
 
 export default defineMessages({
   header: {
