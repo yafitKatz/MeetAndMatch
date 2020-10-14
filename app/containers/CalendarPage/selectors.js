@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the calendarPage state domain
  */
 
-const selectCalendarPageDomain = state => state.meetings || initialState;
+const selectCalendarPageDomain = state => state.global || initialState;
 
 /**
  * Other specific selectors
@@ -15,18 +15,11 @@ const selectCalendarPageDomain = state => state.meetings || initialState;
  * Default selector used by CalendarPage
  */
 
-const makeSelectMeetingEvent = () =>
+const makeDefaultSelect = () =>
   createSelector(
     selectCalendarPageDomain,
-    substate =>
-      [] &&
-      substate.map(meeting => ({
-        id: meeting.id,
-        title: `${meeting.firstParticipant.firstName} ${meeting.firstParticipant.lastName} - 
-        ${meeting.secondParticipant.firstName} ${meeting.secondParticipant.lastName}`,
-        start: meeting.date,
-      })),
+    substate => substate,
   );
 
-export default makeSelectMeetingEvent;
+export default makeDefaultSelect;
 export { selectCalendarPageDomain };
