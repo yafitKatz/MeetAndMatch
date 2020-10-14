@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the meetingsDashboard state domain
  */
 
-const selectMeetingsDashboardDomain = state => state.meetings || initialState;
+const selectMeetingsDashboardDomain = state => state.global || initialState;
 
 /**
  * Other specific selectors
@@ -15,21 +15,10 @@ const selectMeetingsDashboardDomain = state => state.meetings || initialState;
  * Default selector used by MeetingsDashboard
  */
 
-const makeSelectMeetingCard = () =>
+const makeDefaultSelect = () =>
   createSelector(
     selectMeetingsDashboardDomain,
-    substate =>
-      [] &&
-      substate.map(meeting => ({
-        id: meeting.id,
-        firstParticipant: `${meeting.firstParticipant.firstName} 
-        ${meeting.firstParticipant.lastName}`,
-        secondParticipant: `${meeting.secondParticipant.firstName} 
-        ${meeting.secondParticipant.lastName}`,
-        date: meeting.date,
-        address: meeting.address,
-      })),
-  );
+    substate => substate );
 
-export default makeSelectMeetingCard;
+export default makeDefaultSelect;
 export { selectMeetingsDashboardDomain };
