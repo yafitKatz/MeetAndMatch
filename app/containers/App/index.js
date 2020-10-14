@@ -13,7 +13,8 @@ import { compose } from 'redux';
 import { useInjectReducer } from 'utils/injectReducer';
 
 import { Switch, Route } from 'react-router-dom';
-
+import { makeSelectMeetingCard, makeSelectMeetingEvent } from './selectors';
+import { addMeeting, delMeeting } from './actions';
 import HomePage from 'components/HomePage/Loadable';
 import AddMeetingPage from 'containers/AddMeetingPage';
 import MeetingsDashboard from 'containers/MeetingsDashboard';
@@ -24,7 +25,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import 'style.scss';
 
-export function App() {
+export function App(props) {
   useInjectReducer({ key: 'app', reducer });
 
   return (
@@ -34,8 +35,8 @@ export function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/addMeeting" component={() => <AddMeetingPage />} />
-          <Route path="/meetingsDashboard" component={() => <MeetingsDashboard />} />
-          <Route path="/calendar" component={() => <CalendarPage />} />
+          <Route path="/meetingsDashboard" component={() => <MeetingsDashboard meetings={props.meetingCards} />} />
+          <Route path="/calendar" component={() => <CalendarPage events={props.meetingEvents} />} />
           <Route component={NotFoundPage} />
         </Switch>
         <Footer />
@@ -44,12 +45,26 @@ export function App() {
   );
 }
 
-App.propTypes = {};
+App.propTypes = {
+  addMeeting: PropTypes.func,
+  delMeeting: PropTypes.func,
+  meetingCards: PropTypes.array,
+  meetingEvents: PropTypes.array,
+  dispatch: PropTypes.func.isRequired,
 
-const mapStateToProps = createStructuredSelector({});
+};
+
+const mapStateToProps = createStructuredSelector({
+  meetingCards: makeSelectMeetingCard(),
+  meetingEvents: makeSelectMeetingEvent(),
+
+});
 
 function mapDispatchToProps(dispatch) {
   return {
+    delMeeting: meeting => dispatch(delMeeting(meeting)),
+    // return bindActionCreators({ addMeeting }, dispatch);
+    addMeeting: meeting => dispatch(addMeeting(meeting)),
     dispatch,
   };
 }
