@@ -47,7 +47,7 @@ export function CalendarPage(props) {
           id="calendar"
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
-          events={props.meetingEvents}
+          events={props.events}
           dayMaxEvents={1}
           eventClick={
             arg => {
@@ -76,11 +76,11 @@ export function CalendarPage(props) {
 }
 
 CalendarPage.propTypes = {
-  meetingEvents: PropTypes.array,
+  // meetingEvents: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
-  meetingEvents: makeSelectMeetingEvent(),
+  // meetingEvents: makeSelectMeetingEvent(),
 });
 
 function mapDispatchToProps(dispatch) {
