@@ -50,19 +50,13 @@ export function MeetingsDashboard(props) {
 
 MeetingsDashboard.propTypes = {
   delMeeting: PropTypes.func,
-  // meetingCards: PropTypes.array,
-  // dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = createStructuredSelector({
-  // meetingCards: makeSelectMeetingCard(),
-});
+const mapStateToProps = createStructuredSelector({});
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ delMeeting }, dispatch)
   // delMeeting: meeting => dispatch(delMeeting(meeting)),
-  //   dispatch,
-  // };
 };
 
 const withConnect = connect(
