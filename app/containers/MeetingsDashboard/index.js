@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
+import { compose, bindActionCreators } from 'redux';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import reducer from './reducer';
@@ -21,7 +21,7 @@ import makeSelectMeetingCard from './selectors';
 export function MeetingsDashboard(props) {
   useInjectReducer({ key: 'meetingsDashboard', reducer });
 
-  const cardsArr = props.meetingCards.map(card => (
+  const cardsArr = props.meetings.map(card => (
     <div className="meetingCard">
       <MeetingCard
         key={card.id}
@@ -30,7 +30,7 @@ export function MeetingsDashboard(props) {
         date={card.date}
         address={card.address}
       />
-      <button type="button" onClick={() => props.delMeeting(...card.id)}>
+      <button type="button" onClick={() => props.delMeeting(card)}>
         DELETE
       </button>
     </div>
@@ -50,20 +50,20 @@ export function MeetingsDashboard(props) {
 
 MeetingsDashboard.propTypes = {
   delMeeting: PropTypes.func,
-  meetingCards: PropTypes.array,
-  dispatch: PropTypes.func.isRequired,
+  // meetingCards: PropTypes.array,
+  // dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  meetingCards: makeSelectMeetingCard(),
+  // meetingCards: makeSelectMeetingCard(),
 });
 
 function mapDispatchToProps(dispatch) {
-  return {
-    delMeeting: meeting => dispatch(delMeeting(meeting)),
-    dispatch,
-  };
-}
+  return bindActionCreators({ delMeeting }, dispatch)
+  // delMeeting: meeting => dispatch(delMeeting(meeting)),
+  //   dispatch,
+  // };
+};
 
 const withConnect = connect(
   mapStateToProps,
