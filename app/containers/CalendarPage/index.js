@@ -32,10 +32,6 @@ export function CalendarPage(props) {
   useInjectReducer({ key: 'calendarPage', reducer });
   useInjectSaga({ key: 'calendarPage', saga });
 
-  // const handleDateClick = arg => {
-  //   alert(arg.dateStr);
-  // };
-
   return (
     <div>
       <Helmet>
@@ -75,13 +71,9 @@ export function CalendarPage(props) {
   );
 }
 
-CalendarPage.propTypes = {
-  // meetingEvents: PropTypes.array,
-};
+CalendarPage.propTypes = {};
 
-const mapStateToProps = createStructuredSelector({
-  // meetingEvents: makeSelectMeetingEvent(),
-});
+const mapStateToProps = createStructuredSelector({});
 
 function mapDispatchToProps(dispatch) {
   return {
