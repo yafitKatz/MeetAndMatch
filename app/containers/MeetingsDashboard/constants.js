@@ -4,4 +4,4 @@
  *
  */
 
-export const DEL_MEETING = 'app/MeetingsDashboard/DEL_MEETING';
+export const DEL_MEETING = 'boiler-meet-and-match/App/DEL_MEETING';
