@@ -6,11 +6,40 @@ import { initialState } from './reducer';
  * Direct selector to the app state domain
  */
 
-const selectMeeting = state => state.meetings || initialState;
+const selectGlobal = state => state.global || initialState;
 
 /**
  * Other specific selectors
  */
+
+const makeSelectMeetingCard = () =>
+  createSelector(
+    selectGlobal,
+    substate =>
+      [] &&
+      substate.map(meeting => ({
+        id: meeting.id,
+        firstParticipant: `${meeting.firstParticipant.firstName} 
+      ${meeting.firstParticipant.lastName}`,
+        secondParticipant: `${meeting.secondParticipant.firstName} 
+      ${meeting.secondParticipant.lastName}`,
+        date: meeting.date,
+        address: meeting.address,
+      })),
+  );
+
+const makeSelectMeetingEvent = () =>
+  createSelector(
+    selectGlobal,
+    substate =>
+      [] &&
+      substate.map(meeting => ({
+        id: meeting.id,
+        title: `${meeting.firstParticipant.firstName} ${meeting.firstParticipant.lastName} - 
+      ${meeting.secondParticipant.firstName} ${meeting.secondParticipant.lastName}`,
+        start: meeting.date,
+      })),
+  );
 
 /**
  * Default selector used by App
@@ -18,8 +47,10 @@ const selectMeeting = state => state.meetings || initialState;
 
 const makeDefaultSelect = () =>
   createSelector(
-    selectMeeting,
+    selectGlobal,
     substate => substate,
   );
 
-export { makeDefaultSelect };
+export default makeDefaultSelect;
+
+export { makeSelectMeetingCard, makeSelectMeetingEvent };
