@@ -9,11 +9,11 @@ import { initialState } from './reducer';
  * Default selector used by AddMeetingPage
  */
 
-const selectMeeting = state => state.meetings || initialState;
+const selectGlobal = state => state.global || initialState;
 
 const makeSelectMeetingCard = () =>
   createSelector(
-    selectMeeting,
+    selectGlobal,
     substate =>
       [] &&
       substate.map(meeting => ({
@@ -27,4 +27,4 @@ const makeSelectMeetingCard = () =>
       })),
   );
 
-export { selectMeeting, makeSelectMeetingCard };
+export { makeSelectMeetingCard };
