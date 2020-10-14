@@ -6,9 +6,9 @@
 
 import { DEL_MEETING } from './constants';
 
-export function delMeeting(props) {
+export function delMeeting(meeting) {
   return {
     type: DEL_MEETING,
-    payload: props.meeting,
+    payload: meeting,
   };
 }
