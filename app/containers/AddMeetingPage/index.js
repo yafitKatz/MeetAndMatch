@@ -19,7 +19,6 @@ import Button from '../../components/Button';
 import reducer from './reducer';
 import saga from './saga';
 import { addMeeting } from './actions';
-// import { makeSelectMeetingCard } from './selectors';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
 import Link from './Link';
@@ -75,6 +74,7 @@ export function AddMeetingPage(props) {
     newMeeting.secondParticipant.phone = SecondPhoneRef.current.value;
     newMeeting.secondParticipant.email = SecondEmailRef.current.value;
     // mapDispatchToProps(addMeeting({ newMeeting }));
+    debugger;
     props.addMeeting(newMeeting);
     setShow(true);
     // ${this}.unbind('onSubmit').submit();
@@ -82,6 +82,21 @@ export function AddMeetingPage(props) {
 
   return (
     <div>
+      {show && (
+        <Alert variant="light">
+          <Alert.Heading>THE MEETING WAS ADDED SUCCESSFULY!</Alert.Heading>
+          <Link
+            to='/MeetingsDashboard'
+            // to={{
+            //   pathname: '/MeetingsDashboard',
+            //   state: { global: props.meetingCard },
+            // }}
+            id="alertLink"
+          >
+            Move to Meetings Dashboard
+          </Link>
+        </Alert>
+      )}
       <Form onSubmit={mapFormToDispatch}>
         <center>
           <h3>First Participant Details:</h3>
@@ -246,37 +261,11 @@ export function AddMeetingPage(props) {
           </Form.Row>
         </center>
       </Form>
-      {show && (
-        <Alert variant="light">
-          <Alert.Heading>THE MEETING WAS ADDED SUCCESSFULY!</Alert.Heading>
-          <Link
-            to={{
-              pathname: '/MeetingsDashboard',
-              state: { meetings: props.meetingCard },
-            }}
-            id="alertLink"
-          >
-            Move to Meetings Dashboard
-          </Link>
-        </Alert>
-      )}
     </div>
   );
 }
 
 AddMeetingPage.propTypes = {
-  // eslint-disable-next-line react/no-unused-prop-types
-  // FirstFnameRef: PropTypes.string,
-  // FirstLnameRef: PropTypes.string,
-  // FirstPhoneRef: PropTypes.string,
-  // FirstEmailRef: PropTypes.string,
-  // SecondFnameRef: PropTypes.string,
-  // SecondLnameRef: PropTypes.string,
-  // SecondPhoneRef: PropTypes.string,
-  // SecondEmailRef: PropTypes.string,
-  // AddressRef: PropTypes.string,
-  // DateRef: PropTypes.string,
-  // newMeeting: PropTypes.object,
   addMeeting: PropTypes.func,
   meetingCard: PropTypes.array,
 };
@@ -284,7 +273,8 @@ AddMeetingPage.propTypes = {
 const mapStateToProps = createStructuredSelector({});
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ addMeeting }, dispatch);
+  return { addMeeting: meeting => dispatch(addMeeting(meeting)) };
+  // return bindActionCreators({ addMeeting }, dispatch);
 }
 
 const withConnect = connect(
